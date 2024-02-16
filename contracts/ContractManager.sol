@@ -21,6 +21,21 @@ contract ContractManager {
         isAuthorized[owner] = true;
     }
 
+    modifier isValidAddress(address _contractAddress) {
+        require(_contractAddress != address(0), "Invalid address");
+        _;
+    }
+
+    modifier isOwner() {
+        require(owner == msg.sender, "Only owner can make this call");
+        _;
+    }
+
+    modifier isAuthorizedUser() {
+        require(isAuthorized[msg.sender], "Unauthorized user");
+        _;
+    }
+
     function grantAccess(address _user) external isOwner isValidAddress(_user) {
         require(!isAuthorized[_user], "User already authorized");
         isAuthorized[_user] = true;
@@ -94,20 +109,5 @@ contract ContractManager {
             size := extcodesize(_contractAddress)
         }
         return size > 0;
-    }
-
-    modifier isValidAddress(address _contractAddress) {
-        require(_contractAddress != address(0), "Invalid address");
-        _;
-    }
-
-    modifier isOwner() {
-        require(owner == msg.sender, "Only owner can make this call");
-        _;
-    }
-
-    modifier isAuthorizedUser() {
-        require(isAuthorized[msg.sender], "Unauthorized user");
-        _;
     }
 }
