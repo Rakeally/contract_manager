@@ -2,9 +2,9 @@
 
 A smart contract for efficiently managing contract addresses and respective descriptions.
 
-**SmartContract:**
-**Test script:** 
-**Documentation:**
+**SmartContract:** [ContractManager smartcontract](https://github.com/Rakeally/contract_manager/blob/main/contracts/contractManager.sol)
+**Test script:**  [ContractManager test script](https://github.com/Rakeally/contract_manager/blob/main/test/contractManagerTest.js)
+**Documentation:** [ContractManager documentation](https://github.com/Rakeally/contract_manager/blob/main/documentation/contractManagerDoc.pdf)
 
 **Steps for test**
 
