@@ -1,13 +1,20 @@
-# Sample Hardhat Project
+# Contract Manager
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+A smart contract for efficiently managing contract addresses and respective descriptions.
 
-Try running some of the following tasks:
+**SmartContract:**
+**Test script:** 
+**Documentation:**
+
+**Steps for test**
 
 ```shell
-npx hardhat help
+<!--install dependencies-->
+npm i
+<!--execute test script-->
 npx hardhat test
+<!--execute test script with gas consumption report-->
 REPORT_GAS=true npx hardhat test
-npx hardhat node
+<!--execute deployment file-->
 npx hardhat run scripts/deploy.js
 ```
