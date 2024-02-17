@@ -26,7 +26,7 @@ contract ContractManager {
         _;
     }
 
-    modifier isAuthorizedUser() {
+    modifier onlyAuthorizedUser() {
         require(isAuthorized[msg.sender], "Unauthorized user");
         _;
     }
@@ -63,7 +63,7 @@ contract ContractManager {
     function addContract(
         address _contractAddress,
         string memory _description
-    ) external isAuthorizedUser isValidAddress(_contractAddress) {
+    ) external onlyAuthorizedUser isValidAddress(_contractAddress) {
         require(
             bytes(Contracts[_contractAddress]).length <= 0,
             "Contract address already exist"
@@ -85,7 +85,7 @@ contract ContractManager {
     function updateContractDescription(
         address _contractAddress,
         string memory _newDescription
-    ) external isAuthorizedUser isValidAddress(_contractAddress) {
+    ) external onlyAuthorizedUser isValidAddress(_contractAddress) {
         require(
             bytes(Contracts[_contractAddress]).length > 0,
             "Contract address not found"
@@ -102,7 +102,7 @@ contract ContractManager {
 
     function removeContract(
         address _contractAddress
-    ) external isAuthorizedUser isValidAddress(_contractAddress) {
+    ) external onlyAuthorizedUser isValidAddress(_contractAddress) {
         require(
             bytes(Contracts[_contractAddress]).length > 0,
             "Contract address not found"
