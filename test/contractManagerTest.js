@@ -115,7 +115,7 @@ describe("ContractManager", async function () {
     });
   });
 
-  describe("Test contract info saving", async () => {
+  describe("Test contract info storing", async () => {
     it("should revert if caller is unauthorized", async function () {
       const contractAddress = contractManager.target;
       const description = "This contract is about contract management";

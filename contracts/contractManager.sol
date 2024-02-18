@@ -21,21 +21,25 @@ contract ContractManager {
         isAuthorized[owner] = true;
     }
 
+    //verify if function caller is owner
     modifier isOwner() {
         require(owner == msg.sender, "Only owner can make this call");
         _;
     }
 
+    //verify if function caller has authorization
     modifier onlyAuthorizedUser() {
         require(isAuthorized[msg.sender], "Unauthorized user");
         _;
     }
 
-    modifier isValidAddress(address _contractAddress) {
-        require(_contractAddress != address(0), "Invalid address");
+    //verify if address provided is valid
+    modifier isValidAddress(address _address) {
+        require(_address != address(0), "Invalid address");
         _;
     }
 
+    //verify if provided address is a contract address
     function _isValidContractAddress(
         address _contractAddress
     ) internal view returns (bool) {
@@ -46,12 +50,14 @@ contract ContractManager {
         return size > 0;
     }
 
+    //give priviledges to users to operate in this contract manager smartcontract
     function grantAccess(address _user) external isOwner isValidAddress(_user) {
         require(!isAuthorized[_user], "User already authorized");
         isAuthorized[_user] = true;
         emit AccessInfo(_user, "Access granted");
     }
 
+    //remove priviledges given users to operate in this contract manager smartcontract
     function revokeAccess(
         address _user
     ) external isOwner isValidAddress(_user) {
@@ -60,6 +66,7 @@ contract ContractManager {
         emit AccessInfo(_user, "Access revoked");
     }
 
+    //permits authorized users to store contract addresses with respective descriptions
     function addContract(
         address _contractAddress,
         string memory _description
@@ -82,6 +89,7 @@ contract ContractManager {
         );
     }
 
+    //permits authorized users to update stored contract address description
     function updateContractDescription(
         address _contractAddress,
         string memory _newDescription
@@ -100,6 +108,7 @@ contract ContractManager {
         );
     }
 
+    //permits authorized users to remove stored contract address  and description
     function removeContract(
         address _contractAddress
     ) external onlyAuthorizedUser isValidAddress(_contractAddress) {
